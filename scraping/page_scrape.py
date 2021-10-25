@@ -7,18 +7,25 @@ from bs4 import BeautifulSoup
 class NoSuchDefinitionException(Exception):
     """ Raised when there is no definition for passed word.  """
 
-def make_request(term : str):
+def make_request(word : str):
     """Make requests and return a BeautifulSoup object of the page."""
 
-    url = "https://www.urbandictionary.com/define.php?term={}".format(term)
+    url = "https://www.urbandictionary.com/define.php?term={}".format(word)
 
     html = requests.get(url).text
     soup = BeautifulSoup(html, "html.parser")
 
     return soup
 
-def check_word(soup : BeautifulSoup, word : str):
+def check_word(soup : BeautifulSoup):
     """Checks that the word definition exists"""
 
     if soup.body.div.find('div', {"class":"shrug space"}) is not None:
         raise NoSuchDefinitionException
+    else:
+        return True
+
+def get_word_defs(soup : BeautifulSoup):
+    """Returns word definitions as bs4.element.Tags"""
+
+    return [div for div in soup.find_all('div', {'class' : 'def-panel'})]
