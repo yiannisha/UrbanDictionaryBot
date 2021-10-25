@@ -25,7 +25,7 @@ def check_word(soup : BeautifulSoup):
     else:
         return True
 
-def get_word_defs(soup : BeautifulSoup):
+def scrape_word_defs(soup : BeautifulSoup):
     """Returns word definitions as bs4.element.Tags"""
 
     return [div for div in soup.find_all('div', {'class' : 'def-panel'})]

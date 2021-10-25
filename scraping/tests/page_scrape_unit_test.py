@@ -25,11 +25,11 @@ class Test(unittest.TestCase):
         test_case = page_scrape.make_request('sgfw')
         self.assertRaises(page_scrape.NoSuchDefinitionException, page_scrape.check_word, test_case)
 
-    def test_get_word_defs(self):
+    def test_scrape_word_defs(self):
         """ Tests get_word_defs """
 
         # check if list is returned
-        test_case = page_scrape.get_word_defs(self.test_case)
+        test_case = page_scrape.scrape_word_defs(self.test_case)
         self.assertEqual(type(test_case), list)
 
         # check if items have correct types
