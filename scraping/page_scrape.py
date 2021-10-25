@@ -29,3 +29,11 @@ def scrape_word_defs(soup : BeautifulSoup):
     """Returns word definitions as bs4.element.Tags"""
 
     return [div for div in soup.find_all('div', {'class' : 'def-panel'})]
+
+def get_word_defs(word : str):
+    """Wrapper function for the others functions in this module"""
+
+    soup = make_request(word)
+    check_word(soup)
+    defs = scrape_word_defs(soup)
+    return defs

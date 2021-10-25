@@ -9,7 +9,7 @@ from __main__ import page_scrape
 class Test(unittest.TestCase):
 
     def setUp(self):
-        self.test_case = page_scrape.make_request("bruh")
+        self.test_case = page_scrape.make_request('bruh')
 
     def test_make_request(self):
         """ Tests make_request """
@@ -26,10 +26,21 @@ class Test(unittest.TestCase):
         self.assertRaises(page_scrape.NoSuchDefinitionException, page_scrape.check_word, test_case)
 
     def test_scrape_word_defs(self):
-        """ Tests get_word_defs """
+        """ Tests scrape_word_defs """
 
         # check if list is returned
         test_case = page_scrape.scrape_word_defs(self.test_case)
+        self.assertEqual(type(test_case), list)
+
+        # check if items have correct types
+        for test in test_case:
+            self.assertEqual(type(test), Tag)
+
+    def test_get_word_defs(self):
+        """ Tests get_word_defs """
+
+        # check if list is returned
+        test_case = page_scrape.get_word_defs('bruh')
         self.assertEqual(type(test_case), list)
 
         # check if items have correct types
