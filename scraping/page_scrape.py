@@ -2,6 +2,7 @@
 """ Module for making requests and scraping urban dictionary pages """
 
 import requests
+from requests.exceptions import (InvalidURL, ReadTimeout, HTTPError, ConnectTimeout)
 from bs4 import BeautifulSoup
 
 class NoSuchDefinitionException(Exception):
@@ -10,10 +11,31 @@ class NoSuchDefinitionException(Exception):
 def make_request(word : str):
     """Make requests and return a BeautifulSoup object of the page."""
 
+    LIMIT = 15
+    tries = 0
+    error = ConnectTimeout()
+    html = ''
+
     url = "https://www.urbandictionary.com/define.php?term={}".format(word)
 
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, "html.parser")
+    while(type(error) == ConnectTimeout and tries < LIMIT):
+        try:
+            html = requests.get(url).text
+            break
+        except InvalidURL as e:
+            # produce proper message for bot to answer
+            pass
+        except (HTTPError, ReadTimeout) as e:
+            # produce proper message for bot to answer
+            pass
+        except ConnectTimeout as e:
+            error = e
+            tries += 1
+
+    if html:
+        soup = BeautifulSoup(html, "html.parser")
+    else:
+        soup = None
 
     return soup
 
