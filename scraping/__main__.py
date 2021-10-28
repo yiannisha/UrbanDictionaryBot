@@ -2,8 +2,8 @@
 
 """ Run unit tests for scraping module. """
 
-import page_scrape
-from tests import page_scrape_unit_test
+import page_scrape, process_data
+from tests import (process_data_unit_test, page_scrape_unit_test)
 
 import unittest
 
@@ -25,5 +25,6 @@ def run_tests(tests):
     return results
 
 if __name__ == '__main__':
-    test_list = [page_scrape_unit_test.Test, ]
+    test_list = [page_scrape_unit_test.Test,
+                 process_data_unit_test.Test,]
     run_tests(test_list)
