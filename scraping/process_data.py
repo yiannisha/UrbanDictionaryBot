@@ -1,10 +1,10 @@
 
 """Module for processing data scraped from UrbanDictionary"""
 
+from scraping.page_scrape import Tags
+
 from bs4 import BeautifulSoup
 from bs4.element import (Tag, NavigableString)
-
-from page_scrape import Tags
 
 def _get_div_text(tag : Tag, class_name : str) -> str:
     """Returns a string of the tag's text."""
