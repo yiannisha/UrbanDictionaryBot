@@ -41,6 +41,9 @@ class Test(unittest.TestCase):
     def test_get_word_defs(self):
         """ Tests get_word_defs """
 
+        # check exceptions raised
+        self.assertRaises(page_scrape.NoSuchDefinitionException, page_scrape.get_word_defs, 'sfgw')
+
         # check if list is returned
         test_case = page_scrape.get_word_defs('bruh')
         self.assertEqual(type(test_case), list)

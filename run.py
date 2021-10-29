@@ -30,10 +30,11 @@ def run_tests(tests):
 
 if __name__ == '__main__':
 
-    if(sys.argv[1] == '-t'):
-        test_list = [page_scrape_unit_test.Test,
-                     process_data_unit_test.Test,]
-        run_tests(test_list)
+    if(len(sys.argv) > 1):
+        if(sys.argv[1] == '-t'):
+            test_list = [page_scrape_unit_test.Test,
+                         process_data_unit_test.Test,]
+            run_tests(test_list)
 
     else:
         bot.run()
