@@ -4,6 +4,8 @@ from scraping.page_scrape import get_word_defs, NoSuchDefinitionException
 from scraping.process_data import scrape_def_data
 
 import os
+import sys
+from datetime import datetime
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -26,7 +28,7 @@ async def on_ready():
 # Bot Commands
 
 @bot.command(name='define', help="Quotes the word's definition from Urban Dictionary.")
-async def define(ctx : commands.Context, word : str):
+async def define(ctx : commands.Context, word : str) -> None:
     """ Prints definition of word from Urban Dictionary """
 
     message = _format_message(_get_definition(word))
@@ -58,18 +60,29 @@ def _format_message(tag_data : Tag_data) -> str:
 # Catch and handle errors
 
 @bot.event
-async def on_command_error(ctx : commands.Context, error : commands.CommandError):
+async def on_command_error(ctx : commands.Context, error : commands.CommandError) -> None:
     """ Handles exceptions raised """
 
     message = _get_error_message(error)
     # print(message)
 
     # TODO: add output to stderr for weird errors
+    undefined_error_msg = 'General error occured.'
+    if message == undefined_error_msg:
+        _log_error(error)
 
     # respond to user
     await ctx.send(message)
 
 # Helper functions for error handling
+
+def _log_error(error: commands.CommandError) -> None:
+    """ Logs error passed """
+
+    with open('err.log', 'a', encoding='utf-8') as f:
+        sys.stderr = f
+        sys.stderr.write(f'{datetime.today()} [ERROR]: {error}\n')
+
 
 def _get_error_message(error : commands.CommandError) -> str:
     """ Generates a message to be sent back in case of an error """
