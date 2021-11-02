@@ -8,7 +8,6 @@ import sys
 from datetime import datetime
 from dotenv import load_dotenv
 from discord.ext import commands
-from typing import List
 # import exceptions
 from discord.ext.commands import MissingRequiredArgument, TooManyArguments, UserInputError
 from requests.exceptions import InvalidURL, ReadTimeout, HTTPError
