@@ -2,7 +2,7 @@
 """ Module for making requests and scraping urban dictionary pages """
 
 import requests
-from requests.exceptions import (InvalidURL, ReadTimeout, HTTPError, ConnectTimeout)
+from requests.exceptions import InvalidURL, ReadTimeout, HTTPError, ConnectTimeout
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -26,12 +26,12 @@ def make_request(word : str) -> BeautifulSoup:
         try:
             html = requests.get(url).text
             break
-        except InvalidURL as e:
-            # produce proper message for bot to answer
-            pass
-        except (HTTPError, ReadTimeout) as e:
-            # produce proper message for bot to answer
-            pass
+        # except InvalidURL as e:
+            # Exception left to be raised for bot to handle
+
+        # except (HTTPError, ReadTimeout) as e:
+            # Exception left to be raised for bot to handle
+
         except ConnectTimeout as e:
             error = e
             tries += 1
