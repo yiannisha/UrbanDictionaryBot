@@ -2,7 +2,7 @@
 A discord bot for searching terms on Urban dictionary
 
 # Add to Server
-Just click the following link:
+Just click the following link:<br>
 https://discord.com/api/oauth2/authorize?client_id=898934967260835840&permissions=2048&scope=bot
 
 # How to User
