@@ -8,7 +8,6 @@ import sys
 from datetime import datetime
 from dotenv import load_dotenv
 from discord.ext import commands
-
 # import exceptions
 from discord.ext.commands import MissingRequiredArgument, TooManyArguments, UserInputError
 from requests.exceptions import InvalidURL, ReadTimeout, HTTPError
@@ -28,10 +27,11 @@ async def on_ready():
 # Bot Commands
 
 @bot.command(name='define', help="Quotes the word's definition from Urban Dictionary.")
-async def define(ctx : commands.Context, word : str) -> None:
+async def define(ctx: commands.Context, *args) -> None:
     """ Prints definition of word from Urban Dictionary """
 
-    message = _format_message(_get_definition(word))
+    search_term = '%20'.join(args)
+    message = _format_message(_get_definition(args))
     await ctx.send(message)
 
 
