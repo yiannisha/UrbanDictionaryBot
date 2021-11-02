@@ -50,9 +50,9 @@ def _format_message(tag_data : Tag_data) -> str:
     """ Returns string of definition to be used as a message  """
 
     format_str = ""\
-        f"Word: {tag_data['word'].capitalize()}\n\n"\
-        f"Meaning: {tag_data['meaning']}\n\n"\
-        "Example:\n"\
+        f"**__Word__**: {tag_data['word'].capitalize()}\n\n"\
+        f"**__Meaning__**: {tag_data['meaning']}\n\n"\
+        "**__Example__**:\n"\
         f"{tag_data['example']}\n"
 
     return format_str
